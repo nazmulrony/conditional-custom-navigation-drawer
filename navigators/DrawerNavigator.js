@@ -6,6 +6,10 @@ import Inventory from "../screens/Inventory";
 import Auction from "../screens/Auction";
 import AddProduct from "../screens/AddProduct";
 import CustomDrawer from "./CustomDrawer";
+import Home from "../screens/Home";
+import Profile from "../screens/Profile";
+import SubMenu1 from "../screens/SubMenu1";
+import SubMenu2 from "../screens/SubMenu2";
 
 const Drawer = createDrawerNavigator();
 
@@ -43,6 +47,8 @@ const DrawerNavigator = () => {
                 ),
                 sceneContainerStyle: { backgroundColor: "white" },
                 headerStyle: { elevation: 0 },
+                drawerActiveBackgroundColor: "#4CAF50",
+                drawerActiveTintColor: "white",
             })}
         >
             {user.role === "grower" && (
@@ -65,6 +71,10 @@ const DrawerNavigator = () => {
                     />
                 </>
             )}
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Profile" component={Profile} />
+            <Drawer.Screen name="SubMenu1" component={SubMenu1} />
+            <Drawer.Screen name="SubMenu2" component={SubMenu2} />
         </Drawer.Navigator>
     );
 };

@@ -1,12 +1,17 @@
 import { View, Text, Image, StatusBar, Pressable } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
     DrawerContentScrollView,
     DrawerItem,
     DrawerItemList,
 } from "@react-navigation/drawer";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import DropDownMenu from "./DropDownMenu";
 
-const CustomDrawer = (props, role) => {
+const CustomDrawer = (props) => {
+    const [screen, setScreen] = useState("Home");
+    const [toggleMenu, setToggleMenu] = useState(false);
     return (
         <View style={{ flex: 1, paddingVertical: StatusBar.currentHeight }}>
             <View
@@ -47,7 +52,103 @@ const CustomDrawer = (props, role) => {
                 </View>
             </View>
             <DrawerContentScrollView {...props}>
-                <DrawerItemList {...props} />
+                {/* <DrawerItemList {...props} /> */}
+                <DrawerItem
+                    label={"Home"}
+                    onPress={() => {
+                        props.navigation.navigate("Home");
+                        setScreen("Home");
+                    }}
+                    activeTintColor="white"
+                    activeBackgroundColor="#4CAF50"
+                    focused={"Home" === screen}
+                />
+
+                <View style={{ marginHorizontal: 8 }}>
+                    <TouchableOpacity
+                        onPress={() => setToggleMenu(!toggleMenu)}
+                        style={{
+                            // marginHorizontal: 16,
+                            padding: 8,
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            borderRadius: 4,
+                        }}
+                    >
+                        <Text>Toggle Menu </Text>
+                        {toggleMenu ? (
+                            <Ionicons
+                                name="chevron-down"
+                                size={22}
+                                color="black"
+                            />
+                        ) : (
+                            <Ionicons
+                                name="chevron-forward"
+                                size={22}
+                                color="black"
+                            />
+                        )}
+                    </TouchableOpacity>
+
+                    {toggleMenu && (
+                        <View style={{ marginLeft: "4%" }}>
+                            <DrawerItem
+                                label={"SubMenu1"}
+                                onPress={() => {
+                                    props.navigation.navigate("SubMenu1");
+                                    setScreen("SubMenu1");
+                                }}
+                                activeTintColor="white"
+                                activeBackgroundColor="#4CAF50"
+                                focused={"SubMenu1" === screen}
+                            />
+                            <DrawerItem
+                                label={"SubMenu2"}
+                                onPress={() => {
+                                    props.navigation.navigate("SubMenu2");
+                                    setScreen("SubMenu2");
+                                }}
+                                activeTintColor="white"
+                                activeBackgroundColor="#4CAF50"
+                                focused={"SubMenu2" === screen}
+                            />
+                        </View>
+                    )}
+                </View>
+                <DropDownMenu label={"Main Menu"}>
+                    <DrawerItem
+                        label={"SubMenu1"}
+                        onPress={() => {
+                            props.navigation.navigate("SubMenu1");
+                            setScreen("SubMenu1");
+                        }}
+                        activeTintColor="white"
+                        activeBackgroundColor="#4CAF50"
+                        focused={"SubMenu1" === screen}
+                    />
+                    <DrawerItem
+                        label={"SubMenu2"}
+                        onPress={() => {
+                            props.navigation.navigate("SubMenu2");
+                            setScreen("SubMenu2");
+                        }}
+                        activeTintColor="white"
+                        activeBackgroundColor="#4CAF50"
+                        focused={"SubMenu2" === screen}
+                    />
+                </DropDownMenu>
+                <DrawerItem
+                    label={"Inventory"}
+                    onPress={() => {
+                        props.navigation.navigate("Inventory");
+                        setScreen("Inventory");
+                    }}
+                    activeTintColor="white"
+                    activeBackgroundColor="#4CAF50"
+                    focused={"Inventory" === screen}
+                />
             </DrawerContentScrollView>
         </View>
     );
