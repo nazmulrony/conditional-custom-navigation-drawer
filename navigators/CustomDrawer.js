@@ -8,6 +8,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import DropDownMenu from "./DropDownMenu";
+import AnimatedDropDownMenu from "./AnimatedDropDownMenu";
 
 const CustomDrawer = (props) => {
     const [screen, setScreen] = useState("Home");
@@ -67,6 +68,7 @@ const CustomDrawer = (props) => {
                 <View style={{ marginHorizontal: 8 }}>
                     <TouchableOpacity
                         onPress={() => setToggleMenu(!toggleMenu)}
+                        activeOpacity={0.7}
                         style={{
                             // marginHorizontal: 16,
                             padding: 8,
@@ -117,7 +119,7 @@ const CustomDrawer = (props) => {
                         </View>
                     )}
                 </View>
-                <DropDownMenu label={"Main Menu"}>
+                <AnimatedDropDownMenu label={"Main Menu"}>
                     <DrawerItem
                         label={"SubMenu1"}
                         onPress={() => {
@@ -138,7 +140,7 @@ const CustomDrawer = (props) => {
                         activeBackgroundColor="#4CAF50"
                         focused={"SubMenu2" === screen}
                     />
-                </DropDownMenu>
+                </AnimatedDropDownMenu>
                 <DrawerItem
                     label={"Inventory"}
                     onPress={() => {
